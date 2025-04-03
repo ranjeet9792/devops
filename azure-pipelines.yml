@@ -4,21 +4,21 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
 trigger:
-- none
+- none  # No triggers for this pipeline
 
 pool:
-  vmImage: ubuntu-latest
-  
-Jobs:
-- job:Build
+  vmImage: 'ubuntu-latest'  # Use the latest Ubuntu-based Microsoft-hosted agent
+
+jobs:
+- job: Build  # Define a job named 'Build'
   steps:
-  - task: Maven@3
+  - task: Maven@3  # Use Maven task to build the project
     inputs:
-      mavenPomFile: 'pom.xml'
-      mavenOptions: '-Xmx3072m'
-      javaHomeOption: 'JDKVersion'
-      jdkVersionOption: '1.11'
-      jdkArchitectureOption: 'x64'
-      publishJUnitResults: true
-      testResultsFiles: '**/surefire-reports/TEST-*.xml'
-      goals: 'package'
+      mavenPomFile: 'pom.xml'  # Specify the Maven POM file location
+      mavenOptions: '-Xmx3072m'  # Set Maven options (e.g., memory settings)
+      javaHomeOption: 'JDKVersion'  # Specify JDK version option
+      jdkVersionOption: '1.11'  # Use JDK 1.11
+      jdkArchitectureOption: 'x64'  # Use 64-bit architecture
+      publishJUnitResults: true  # Publish test results
+      testResultsFiles: '**/surefire-reports/TEST-*.xml'  # Location of JUnit test result files
+      goals: 'package'  # Maven goal to execute (e.g., package)
